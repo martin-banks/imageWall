@@ -1,0 +1,20 @@
+{
+  "name": "imageWall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "http-server -p 3000 -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-banks/imageWall.git"
+  },
+  "keywords": [],
+  "author": "Martin Banks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martin-banks/imageWall/issues"
+  },
+  "homepage": "https://github.com/martin-banks/imageWall#readme"
+}

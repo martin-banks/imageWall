@@ -1,0 +1,28 @@
+#appContainer{
+	top: 0;
+	left:  0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+.grid-item {
+	float: left;
+	width: 250px;
+	height: 250px;
+	background-color: #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	box-sizing: border-box;
+}
+.grid-item:nth-of-type(odd){
+	background-color: #aaa;
+}
+
+.grid-item--width2 { 
+	width: 500px; 
+	background-color: #222;
+}
+.grid-item--height2 { 
+	height: 500px; 
+	background-color: #888;
+	}
