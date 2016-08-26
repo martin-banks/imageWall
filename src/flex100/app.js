@@ -94,19 +94,13 @@
 		if(currentChapter === 0){
 			resetImages()
 		}
-
-		
-
-
 	}
-
-
-
 
 
 	// render page
 	renderTemplate(renderPage(), state.container)
 	getPageDetails();
+
 
 	window.addEventListener("scroll", function () {
 		scrollEvents()
