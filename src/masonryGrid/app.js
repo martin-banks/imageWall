@@ -1,4 +1,5 @@
 (()=>{
+
 	var state = {
 		count: 20,
 		images:{
@@ -17,10 +18,9 @@
 
 	}
 
+
 	const container = document.getElementById('appContainer')
-	var randomNumber = (low, high)=>{
-		return (Math.floor(Math.random()*high)) + low
-	}
+	
 
 	function generateTiles(){
 		let sizes = Object.keys(state.size)
@@ -35,7 +35,7 @@
 			console.groupCollapsed('sizes:', size1, size2())
 			let firstSize = sizes[size1];
 			let secondSize = sizes[size2()];
-			let extraSizes = ''//`${state.size[firstSize]} ${state.size[secondSize]}`
+			let extraSizes = `${state.size[firstSize]} ${state.size[secondSize]}`
 			let newTile = `
 				<div class="grid-item ${extraSizes}" style="background-image: url('${image}')"></div>
 			`
@@ -52,9 +52,6 @@
 		`
 	}
 
-	function renderTemplate(content, into){
-		into.innerHTML = content
-	}
 	
 	renderTemplate(gridTemplate(), container)
 

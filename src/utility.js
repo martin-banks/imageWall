@@ -27,3 +27,11 @@ function delegate(selector, eventName, targetSelector, listener) {
 		}
 	})
 }
+
+function renderTemplate(content, into){
+	into.innerHTML = content
+}
+
+var randomNumber = (low, high)=>{
+	return (Math.floor(Math.random()*high)) + low
+}
