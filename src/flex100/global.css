@@ -132,3 +132,26 @@ h3 span{
 	padding: 0 24px;
 	color: gold;
 }
+
+.chapter.set_left div div.exploreButton,
+.chapter.set_right div div.exploreButton,
+.chapter.set_center div div.exploreButton {
+	overflow: auto;
+	padding: 8px 32px;
+	background-color: #fff;
+	color: #000;
+	text-shadow: none;
+	display: inline-block;
+	margin: 32px auto ;
+}
+
+.activeImage {
+	position: absolute;
+	z-index: 9999999999999999;
+	border: solid 5px red;
+	width: 20%;
+	height: 20%;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}

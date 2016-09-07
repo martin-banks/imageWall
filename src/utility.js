@@ -35,3 +35,7 @@ function renderTemplate(content, into){
 var randomNumber = (low, high)=>{
 	return (Math.floor(Math.random()*high)) + low
 }
+
+delegate('#imageGridContainer', 'click', 'div', ()=>{
+	console.log(event.target.id)
+})
