@@ -155,8 +155,7 @@
 					console.log('number', arr, i, num)
 					return
 				}
-			}
-			
+			}	
 		}
 
 		for(let i=0; i<activeImages.length; i++){
