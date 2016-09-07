@@ -36,6 +36,23 @@ var randomNumber = (low, high)=>{
 	return (Math.floor(Math.random()*high)) + low
 }
 
-delegate('#imageGridContainer', 'click', 'div', ()=>{
-	console.log(event.target.id)
-})
+
+function addClass(elem, className){
+	if (elem.classList) {
+		elem.classList.add(className);
+	} else {
+		elem.className += ' ' + className;
+	}
+}
+
+function removeClass(elem, className){
+	if(!!elem){
+		if (elem.classList) {
+			elem.classList.remove(className);
+		}
+		else {
+			elem.className = elem.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+		}
+	}
+}
+

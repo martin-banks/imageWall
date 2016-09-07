@@ -1,19 +1,14 @@
-(()=>{
+//(()=>{
 
 	var windowHeight = window.innerHeight
 	var windowWidth = window.innerWidth
-	
 
 	function gridTemplate(){
 		let imageGrid = []
 		for(let i = 0; i<state.count; i++){
-			imageGrid.push(`<div id='grid_${i}' class="gridItem fade" style="background-image: url('${state.image.path}${state.image.name}')"></div>`)
+			imageGrid.push(`<div id='grid_${i}' class="gridItem fade" style="background-image: url('${state.image.path}${state.image.name()}')"></div>`)
 		}
 		return imageGrid.join('')
-	}
-
-	function articleOverlay(){
-
 	}
 
 	function chapterTemplate(){
@@ -32,7 +27,6 @@
 				</section>
 			`
 		}).join('')
-		
 	}
 
 	function introTemplate(){
@@ -65,10 +59,13 @@
 	}
 
 	function resetImages(){
-		var gridItems = document.getElementsByClassName('gridItem')
-			for(let i=0; i<gridItems.length; i++){
-				gridItems[i].className = 'gridItem fade';
-			}
+		//resetPositions()
+		var gridItems = document.getElementById('imageGridContainer').children
+		for(let i=0; i<gridItems.length; i++){
+			gridItems[i].className = 'gridItem fade';
+			gridItems[i].style.top = '';
+			gridItems[i].style.left = ''
+		}
 	}
 
 	function highlightImage(count){
@@ -104,9 +101,43 @@
 	getPageDetails();
 
 
-	window.addEventListener("scroll", function () {
+	window.addEventListener("scroll", ()=> {
 		scrollEvents()
 	}, false);
+
+	const positions = {
+		x: [],
+		y: []
+	}
+
+	generateActivePos = ()=>{
+		for(let i = 0; i<6; i++){
+			positions.x.push(Math.floor( windowWidth / 6) * i)
+			positions.y.push(Math.floor( windowHeight / 6) * i)
+		}
+	}
+	generateActivePos()
+	
+
+	function positionActiveImages(activeImages){
+		let x = positions.x;
+		let y = positions.y;
+		for(let i=0; i<activeImages.length; i++){
+			let rX = randomNumber(0, x.length);
+			/*x = x.filter(val=>{
+				return val !== x[rX]
+			})*/
+			let rY = randomNumber(0, y.length);
+			/*y = y.filter(val=>{
+				return val !== y[rY]
+			})*/
+			console.log('\tx', rX, 'y', rY)
+			activeImages[i].className = 'activeImage'
+			activeImages[i].style.top = y[rY] + 'px'
+			activeImages[i].style.left = x[rX] + 'px'
+		}
+	}
+	
 
 
 	delegate('article', 'click', '.exploreButton', ()=>{
@@ -119,60 +150,8 @@
 				activeImages.push(allImages[i]) 
 			}
 		}
-		console.log(activeImages)
-
-		
-		function r(){
-			console.log('generating positions')
-			let num = windowWidth/5 * randomNumber(0, 5)
-			for (let i = 0; i <= randomLeft.length; i++) {
-				if ( num === randomLeft[i]){
-					r()
-					return
-				} else {
-					randomLeft.push(num)
-					console.log(randomLeft.length, activeImages.length)
-				}
-				if( randomLeft.length !== activeImages.length){
-					r()
-				}
-			}
-		}
-		//r()
-
-		var randomLeft = [];
-		var randomTop = [];
-
-		function generate(arr){
-			var num = Math.floor(windowWidth/5 * randomNumber(0, 5))
-		
-			for(let i = 0; i<=arr.length; i++){
-				if (num === arr[i]){
-					generate(arr)
-					return
-				} else {
-					arr.push(num)
-					console.log('number', arr, i, num)
-					return
-				}
-			}	
-		}
-
-		for(let i=0; i<activeImages.length; i++){
-			generate(randomLeft)
-			generate(randomTop)
-
-			activeImages[i].className = 'activeImage'
-		}
-
-		setTimeout(function() {
-			for(let i=0; i<activeImages.length; i++){
-				activeImages[i].style.top = randomTop[i] + 'px'
-				activeImages[i].style.left = randomLeft[i] + 'px'
-			}
-		}, 3000);
-
-
-	})
+		console.log(activeImages);
+		positionActiveImages(activeImages)
+	});
 	
-})()
+//})()
