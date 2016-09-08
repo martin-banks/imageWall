@@ -11,11 +11,14 @@
 	
 	function gridTemplate(){
 		let imageGrid = []
-		for(let i = 0; i<state.count; i++){
+		for(let i = 0; i<state.count; i++){;
+			let r = randomNumber(0,6)
+			//console.log(r)
 			imageGrid.push(`
-				<div id='grid_${i}' class="grid-item fade" style="background-image: url('${state.image.path}${state.image.name()}')">
+				<div id='grid_${i}' class="grid-item fade" data-chapter='${r+1}'
+					style="background-image: url('${state.image.path}${state.article.chapters[r].image}')">
 				</div>
-				`)
+			`)
 		}
 		return imageGrid.join('')
 	}
@@ -79,10 +82,21 @@
 
 	
 
-	function highlightImage(count){
+	function highlightImage(num){
+		let allChapterImages = document.getElementsByClassName(`grid-item`)
+		/*let activeImages = allChapterImages.filter((image)=>{
+			return image.hasAttribute(`chapter${num}`)
+		})*/
+		console.log(num)
+		let count = allChapterImages.length
 		for(let i = 0; i<count; i++){
-			var randomImage = document.getElementById(`grid_${randomNumber(1, 99)}`);
-			randomImage.className = 'grid-item';
+			console.log(allChapterImages[i].getAttribute(`data-chapter`))
+			if(allChapterImages[i].getAttribute(`data-chapter`) == num ){
+				allChapterImages[i].className = 'grid-item'
+			}
+			//let randomImage = document.getElementById(`grid_${randomNumber(1, 99)}`);
+			//randomImage.className = 'grid-item';
+			
 		}
 	}
 
@@ -100,10 +114,10 @@
 		const imageHeight = 10
 		//const currentRow = ()=> numberOfRows * i // 0 index
 		for (let currentRow = 0; currentRow<numberOfRows; currentRow++){
-			console.log('current row', currentRow)
+			//console.log('current row', currentRow)
 			for(let rowIndex = 0; rowIndex<imagesPerRow; rowIndex++){
 				let imageToChange = (currentRow * imagesPerRow) + rowIndex
-				console.log('image to change', imageToChange)
+				//console.log('image to change', imageToChange)
 				allGridItems[imageToChange].style.top = `${rowIndex * imageWidth }%`
 				allGridItems[imageToChange].style.left = `${currentRow * imageHeight}%`
 				allGridItems[imageToChange].className = `grid-item fade`
@@ -116,7 +130,7 @@
 
 	function positionActiveImages(){
 		let allImages = document.getElementsByClassName('grid-item');
-		console.log(allImages)
+		//console.log(allImages)
 		let activeImages = []
 
 		for(let i=0; i<allImages.length; i++){
@@ -124,33 +138,35 @@
 				activeImages.push(allImages[i]) 
 			}
 		}
-		console.log(activeImages);
+		//console.log(activeImages);
 		let x = positions.x;
 		let y = positions.y;
 		for(let i=0; i<activeImages.length; i++){
 			let rX = randomNumber(0, x.length);
 			let rY = randomNumber(0, y.length);
 
-			console.log('\tx', rX, 'y', rY)
+			//console.log('\tx', rX, 'y', rY)
 			activeImages[i].className = 'grid-item activeImage'
 			activeImages[i].style.top = y[rY] + 'px'
 			activeImages[i].style.left = x[rX] + 'px'
 		}
-		console.log('\n-----------------------\n')
+		//console.log('\n-----------------------\n')
 	}
 
 
 	function scrollEvents(){
 		var scrollPosition = window.scrollY
 		var currentChapter = Math.ceil((scrollPosition / state.articleHeight())  * state.chapterCount)
+		console.log(state.article.previousChapter, currentChapter)
+		//console.log('scroll pos', scrollPosition)
+		//console.log('article height', state.articleHeight())
+		//console.log('chapter count', state.chapterCount)
 		if(currentChapter !== state.article.previousChapter){
 			state.article.previousChapter = currentChapter;
 			resetImages();
-			highlightImage(randomNumber(5,10))
+			highlightImage(currentChapter)
 			positionActiveImages()
-			
-			
-			console.log(state.article.previousChapter, currentChapter);
+			//console.log(state.article.previousChapter, currentChapter);
 		}
 		if(currentChapter === 0){
 			resetImages()
