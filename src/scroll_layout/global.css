@@ -1,0 +1,184 @@
+*{
+	padding: 0;
+	margin:  0;
+	box-sizing: border-box;
+	transition: all 0.5s ease-in-out 0s;
+}
+
+div{
+	transition: all 0.5s ease-in-out 0s;
+}
+body{
+	background-color: #000;
+}
+
+#imageGridContainer{
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	display: block;
+
+	z-index: -1;
+}
+.grid{
+	width: 100%;
+	height: 100vh;
+	display: block;
+	//overflow: auto;
+	overflow: visible;
+}
+
+.grid-sizer,
+.grid-item {
+/*
+	transition: all 1s ease-in-out 0s;
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border:  solid 1px #ccc;
+	//flex-grow: 1;
+	//flex-shrink: 1;
+	align-self: flex-start;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+*/
+	position: absolute;
+	float: left;
+	width: 10%;
+	//height: 250px;
+	background-color: #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	box-sizing: border-box;
+	//overflow: auto;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+}
+
+.fade{
+	opacity: 0.3;
+}
+
+.introContainer hr {
+	
+}
+hr.white { 
+	border: solid 4px #fff;
+}
+
+hr.short {
+	margin: 50px auto 50px auto;
+	max-width: 60%;
+}
+
+
+#introContainer{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color:  #fff;
+	//margin-bottom: 100px;
+	text-align: center;
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 1.0);
+}
+
+#articleContainer{
+	//margin-bottom: 100%;
+}
+
+#articleContainer article  {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+#articleContainer article section {
+	width: 100%;
+	padding: 10%;
+	//display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 1.0);
+}
+
+
+
+#introContainer h1 {
+	font-size: 120px;
+	margin: 0;
+}
+
+#introContainer h2 {
+	font-weight: 100;
+	font-size: 40px;
+	letter-spacing: 0.04em;
+	margin: 0 20% ;
+}
+
+
+article section, h3, p {
+	width: 100%;
+	display: block;
+}
+
+
+
+.chapter {
+	text-align: center;
+}
+
+.chapter.set_left div {
+	margin: 0 60% 0 0 ;
+}
+
+.chapter.set_center div {
+	margin: 0 30% 0 30% ;
+}
+
+.chapter.set_right div {
+	margin: 0 0 0 60% ;
+}
+
+
+h3 {
+	font-weight: 800;
+	font-size: 60px;
+	margin-bottom: 30px;
+}
+h5 {
+	font-size: 32px;
+}
+
+h3 span{
+	background-color: #000;
+	padding: 0 24px;
+	color: gold;
+}
+
+.chapter.set_left div div.exploreButton,
+.chapter.set_right div div.exploreButton,
+.chapter.set_center div div.exploreButton {
+	overflow: auto;
+	padding: 8px 32px;
+	background-color: #fff;
+	color: #000;
+	text-shadow: none;
+	display: inline-block;
+	margin: 32px auto ;
+}
+
+.activeImage {
+	position: absolute;
+	z-index: 9999999999999999;
+	border: solid 5px red;
+	width: 14%;
+	height: 14%;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
