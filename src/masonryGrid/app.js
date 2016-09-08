@@ -76,7 +76,7 @@
 		event.target.className += ' largeGrid'
 		//event.target.style.left = '0'
 		//event.target.style.top = '0'
-		msnry.layout();
+		//msnry.layout();
 		
 	})
 

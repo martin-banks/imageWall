@@ -1,4 +1,4 @@
-//(()=>{
+(()=>{
 
 	var windowHeight = window.innerHeight
 	var windowWidth = window.innerWidth
@@ -153,5 +153,7 @@
 		console.log(activeImages);
 		positionActiveImages(activeImages)
 	});
+
 	
-//})()
+	
+})()
