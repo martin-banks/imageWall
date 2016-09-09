@@ -77,6 +77,7 @@
 					${chapterTemplate()}
 				</article>
 			</section>
+			<section id="popupContainer"></section>
 		`
 	}
 
@@ -90,7 +91,7 @@
 		console.log(num)
 		let count = allChapterImages.length
 		for(let i = 0; i<count; i++){
-			console.log(allChapterImages[i].getAttribute(`data-chapter`))
+			//console.log(allChapterImages[i].getAttribute(`data-chapter`))
 			if(allChapterImages[i].getAttribute(`data-chapter`) == num ){
 				allChapterImages[i].className = 'grid-item'
 			}
@@ -145,12 +146,12 @@
 			let rX = randomNumber(0, x.length);
 			let rY = randomNumber(0, y.length);
 
-			//console.log('\tx', rX, 'y', rY)
+			console.log('\tx', rX, 'y', rY)
 			activeImages[i].className = 'grid-item activeImage'
 			activeImages[i].style.top = y[rY] + 'px'
 			activeImages[i].style.left = x[rX] + 'px'
 		}
-		//console.log('\n-----------------------\n')
+		console.log('\n-----------------------\n')
 	}
 
 
@@ -174,9 +175,9 @@
 	}
 
 	generateActivePos = ()=>{
-		for(let i = 0; i<6; i++){
-			positions.x.push(Math.floor( windowWidth() / 6) * i)
-			positions.y.push(Math.floor( windowHeight() / 6) * i)
+		for(let i = 0; i<8; i++){
+			positions.x.push(Math.floor( windowWidth() / 8) * i)
+			positions.y.push(Math.floor( windowHeight() / 8) * i)
 		}
 	}
 	
@@ -196,10 +197,59 @@
 			scrollEvents();
 
 		}, false);
-		/*
-		delegate('article', 'click', '.exploreButton', ()=>{
-			positionActiveImages()
-		});*/
+
+
+
+		delegate('html', 'click', '.activeImage', ()=>{
+			console.log(event.target)
+			let properties = {
+				pos: {
+					y: event.target.getBoundingClientRect().top,
+					x: event.target.getBoundingClientRect().left
+				},
+				id: event.target.id,
+				img: event.target.style.backgroundImage,
+				size: {
+					w: event.target.style.width,
+					h: event.target.style.height
+				}
+			}			
+			let popupStyle = ()=>{
+				return `
+					width: ${properties.size.w};
+					height: ${properties.size.h};
+					left: ${properties.pos.x}px;
+					top: ${properties.pos.y}px;
+					background-image: ${properties.img}
+				`
+			}
+			let popupCard = ()=>{
+				return `
+					<div id="popup">
+						<div id="popupImage" class="popupImagePosition" style='${popupStyle()}'></div>
+					</div>
+				`
+			}
+			console.log(popupCard());
+			renderTemplate(popupCard(), document.getElementById('popupContainer'))
+			Velocity(document.getElementById("popupImage"), { 
+																left: '20%', 
+																top: '20%',
+																width: '60%',
+																height: '60%',
+																boxShadowBlur: 350
+															}, 
+															{ 
+																duration: 300,
+																delay: 100
+															});
+			delegate('#popupContainer', 'click', '#popupImage', ()=>{
+				// remove popup image
+				document.getElementById('popupContainer').innerHTML = ''
+			})
+		});
+
+
 	}
 	
 
