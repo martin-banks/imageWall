@@ -202,7 +202,7 @@
 
 		delegate('html', 'click', '.activeImage', ()=>{
 			console.log(event.target)
-			let properties = {
+			const properties = {
 				pos: {
 					y: event.target.getBoundingClientRect().top,
 					x: event.target.getBoundingClientRect().left
@@ -226,26 +226,41 @@
 			let popupCard = ()=>{
 				return `
 					<div id="popup">
-						<div id="popupImage" class="popupImagePosition" style='${popupStyle()}'></div>
+						<div id="popupImage" class="popupImagePosition" style='${popupStyle()}'>
+							<h2>${properties.id}</h2>
+						</div>
 					</div>
 				`
 			}
 			console.log(popupCard());
-			renderTemplate(popupCard(), document.getElementById('popupContainer'))
+			renderTemplate(popupCard(), document.getElementById('popupContainer'));
+			event.target.style.display = 'none'
 			Velocity(document.getElementById("popupImage"), { 
 																left: '20%', 
 																top: '20%',
 																width: '60%',
 																height: '60%',
-																boxShadowBlur: 350
-															}, 
+																boxShadowBlur: 350,
+															},
 															{ 
 																duration: 300,
-																delay: 100
+																delay: 100,
+																
+
 															});
+
 			delegate('#popupContainer', 'click', '#popupImage', ()=>{
 				// remove popup image
-				document.getElementById('popupContainer').innerHTML = ''
+				console.log(properties.pos.x)
+				Velocity(event.target, {
+										left: 0,
+										top: 0,
+										width: '100px',
+										height: '100px'
+									}).then(()=>{
+										document.getElementById('popupContainer').innerHTML = ''
+									})
+				//document.getElementById('popupContainer').innerHTML = ''
 			})
 		});
 
