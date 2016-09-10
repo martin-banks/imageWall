@@ -2,10 +2,24 @@ const article = {
 	headline: '',
 	standfirst: '',
 	byline: '',
-	
+
 	chapters: [
 		{
-			title: ''
+			title: '',
+			text: [
+				'',
+				''
+			],
+			image: {
+				name: '',
+				caption: ''
+			},
+			links: [
+				{
+					text: '',
+					href: ''
+				}
+			] 
 		}
 	]
 }

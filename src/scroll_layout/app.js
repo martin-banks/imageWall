@@ -147,7 +147,7 @@
 			let rY = randomNumber(0, y.length);
 
 			console.log('\tx', rX, 'y', rY)
-			activeImages[i].className = 'grid-item activeImage'
+			activeImages[i].className = `grid-item activeImage float${randomNumber(1,2)}`
 			activeImages[i].style.top = y[rY] + 'px'
 			activeImages[i].style.left = x[rX] + 'px'
 		}
