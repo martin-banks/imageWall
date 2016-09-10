@@ -26,7 +26,10 @@ body{
 	display: block;
 	//overflow: auto;
 	overflow: visible;
+	
 }
+
+
 
 .grid-sizer,
 .grid-item {
@@ -59,6 +62,10 @@ body{
 
 .fade{
 	opacity: 0.3;
+	-webkit-filter: blur(10px);
+}
+.blur {
+	-webkit-filter: blur(10px);
 }
 
 .introContainer hr {
@@ -252,9 +259,9 @@ body,
 /*floating*/
 .float1 {
 	-webkit-animation-name: Floating1;
-	-webkit-animation-duration: 6s;
+	-webkit-animation-duration: 13s;
 	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: linear;
 }
 
 @-webkit-keyframes Floating1 {
@@ -274,9 +281,9 @@ body,
 
 .float2 {
 	-webkit-animation-name: Floating2;
-	-webkit-animation-duration: 6s;
+	-webkit-animation-duration: 20s;
 	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: linear;
 }
 
 @-webkit-keyframes Floating2 {

@@ -244,9 +244,7 @@
 															},
 															{ 
 																duration: 300,
-																delay: 100,
-																
-
+																delay: 100
 															});
 
 			delegate('#popupContainer', 'click', '#popupImage', ()=>{
