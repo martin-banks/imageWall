@@ -18,8 +18,9 @@ function closest(element, query) {
 	return null
 }
 
-function delegate(selector, eventName, targetSelector, listener) {
-	document.querySelector(selector).addEventListener(eventName, function (event) {
+function delegate(selector, eventName, targetSelector, listener, arg) {
+	let param = arg ? arg : null
+	document.querySelector(selector).addEventListener(eventName, function (event, param) {
 		var closestMatch = closest(event.target, targetSelector)
 		if (closestMatch) {
 			event.delegateTarget = closestMatch

@@ -8,11 +8,57 @@
 		y: []
 	}
 
+
+
+
+	let totalLength = 0
+	let chapterkeys = Object.keys(state.article.chapers) // get all chapter keys
+	
+	let allPartKeys = chapterKeys.map(key=> { // for each chapter
+		let partKeys = Object.keys(state.article.chapters[key]) // add length of each chapters' parts to total
+		totalLength += partKeys.length
+		return partKeys // return all of it's part keys
+	})
+	
+//		should output
+//		chapters [
+//			[ a,b,c ... ],
+//			[ a,b,c ... ],
+//			...
+//		]
+
+
+	for (let i=0; i<=totalLength; i++){
+		let chapterNumber = randomNumber(0, chapterKeys.length)
+		let chapterKey = chapterKeys[chapterNumber]
+		let randomChapter = state.article.chapters[ chapterKey ] // choose random chapter
+		
+		let partNumber = randomNumber(0, allPartKeys)
+		let randomPart = randomChapter[ partNumber ] //choose random part from random chapter
+
+//		----- render ----- 
+
+		chapterKeys.filter((chapterKey, chapterIndex)=>{
+			chapterKey.filter((part, partIndex)=>{
+				return part !== randomPart
+			})
+			return chapterKey.length > 0
+		})
+
+//		filter part
+//			return !part // remove this part from parts array
+//		filter chapter
+//			if chapter.part.length === 0 
+	}
+
+	
+
+
 	
 	function gridTemplate(){
 		let imageGrid = []
-		for(let i = 0; i<state.count; i++){;
-			let r = randomNumber(0,6)
+		for(let i = 0; i<state.article.chapters.length; i++){;
+			let r = randomNumber(0,state.article.chapters.parts.length)
 			//console.log(r)
 			imageGrid.push(`
 				<div id='grid_${i}' class="grid-item fade" data-chapter='${r+1}'
@@ -200,8 +246,8 @@
 
 
 
-		delegate('html', 'click', '.activeImage', ()=>{
-			console.log(event.target)
+		delegate('html', 'click', '.activeImage', ()=>{ // render popup card view
+			document.querySelector('body').style.overflow = 'hidden'
 			const properties = {
 				pos: {
 					y: event.target.getBoundingClientRect().top,
@@ -227,41 +273,54 @@
 				return `
 					<div id="popup">
 						<div id="popupImage" class="popupImagePosition" style='${popupStyle()}'>
-							<h2>${properties.id}</h2>
+							<div class="popupText">
+								<h2>${properties.id}</h2>
+								<p>Dummy text taken from first entry in state. ${state.article.chapters[0].text}</p>
+							</div>
 						</div>
+						
 					</div>
 				`
 			}
 			console.log(popupCard());
 			renderTemplate(popupCard(), document.getElementById('popupContainer'));
-			event.target.style.display = 'none'
-			Velocity(document.getElementById("popupImage"), { 
-																left: '20%', 
-																top: '20%',
-																width: '60%',
-																height: '60%',
-																boxShadowBlur: 350,
-															},
-															{ 
-																duration: 300,
-																delay: 100,
-																
+			//event.target.style.display = 'none'
+			let tileId = closest(event.target, '.grid-item').id;
+			document.getElementById(tileId).style.display = 'none'
+			Velocity(
+				document.getElementById("popupImage"), 
+				{ // store these values in variables
+					left: '20%', 
+					top: '20%',
+					width: '60%',
+					height: '60%',
+					boxShadowBlur: 350,
+				},
+				{ 
+					duration: 300,
+					delay: 100,
+				}
+			);
 
-															});
+			//////////////////////////////
 
-			delegate('#popupContainer', 'click', '#popupImage', ()=>{
+			delegate('#popupContainer', 'click', '#popupImage', (e)=>{ // close panel
+				document.querySelector('body').style.overflow = ''
+				console.log('tile id ', tileId, e)
 				// remove popup image
 				console.log(properties.pos.x)
-				Velocity(event.target, {
+				// animate card closing
+				/*Velocity(event.target, {
 										left: 0,
 										top: 0,
 										width: '100px',
 										height: '100px'
 									}).then(()=>{
 										document.getElementById('popupContainer').innerHTML = ''
-									})
-				//document.getElementById('popupContainer').innerHTML = ''
-			})
+									})*/
+				document.getElementById(tileId).style.display = ''
+				document.getElementById('popupContainer').innerHTML = ''
+			}, tileId)
 		});
 
 
