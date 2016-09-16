@@ -193,7 +193,7 @@
 			let rY = randomNumber(0, y.length);
 
 			console.log('\tx', rX, 'y', rY)
-			activeImages[i].className = 'grid-item activeImage'
+			activeImages[i].className = `grid-item activeImage float${randomNumber(1,2)}`
 			activeImages[i].style.top = y[rY] + 'px'
 			activeImages[i].style.left = x[rX] + 'px'
 		}
@@ -284,6 +284,7 @@
 			}
 			console.log(popupCard());
 			renderTemplate(popupCard(), document.getElementById('popupContainer'));
+<<<<<<< HEAD
 			//event.target.style.display = 'none'
 			let tileId = closest(event.target, '.grid-item').id;
 			document.getElementById(tileId).style.display = 'none'
@@ -307,6 +308,22 @@
 			delegate('#popupContainer', 'click', '#popupImage', (e)=>{ // close panel
 				document.querySelector('body').style.overflow = ''
 				console.log('tile id ', tileId, e)
+=======
+			event.target.style.display = 'none'
+			Velocity(document.getElementById("popupImage"), { 
+																left: '20%', 
+																top: '20%',
+																width: '60%',
+																height: '60%',
+																boxShadowBlur: 350,
+															},
+															{ 
+																duration: 300,
+																delay: 100
+															});
+
+			delegate('#popupContainer', 'click', '#popupImage', ()=>{
+>>>>>>> 04b06d35fd490ebc7288fc4778544861243fd190
 				// remove popup image
 				console.log(properties.pos.x)
 				// animate card closing

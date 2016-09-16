@@ -26,7 +26,10 @@ body{
 	display: block;
 	//overflow: auto;
 	overflow: visible;
+	
 }
+
+
 
 .grid-sizer,
 .grid-item {
@@ -59,6 +62,10 @@ body{
 
 .fade{
 	opacity: 0.3;
+	-webkit-filter: blur(10px);
+}
+.blur {
+	-webkit-filter: blur(10px);
 }
 
 .introContainer hr {
@@ -248,6 +255,7 @@ body,
 	z-index: 9999999999;
 }
 
+<<<<<<< HEAD
 .popupText {
 	position: absolute;
 	width: 30%;
@@ -256,4 +264,52 @@ body,
 	transform: translateY(-50%);
 	padding: 32px;
 	background-color: rgba(255, 255, 255, 0.6);
+=======
+}
+
+
+/*floating*/
+.float1 {
+	-webkit-animation-name: Floating1;
+	-webkit-animation-duration: 13s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes Floating1 {
+    from {
+    	-webkit-transform:translate(0, 0px);
+    }
+    30% {
+    	-webkit-transform: translate(10px, 5px);
+    }
+    65% {
+    	-webkit-transform:translate(-5px, 15px);
+    }
+    to {
+    	-webkit-transform: translate(0, -0px)
+    }    
+}
+
+.float2 {
+	-webkit-animation-name: Floating2;
+	-webkit-animation-duration: 20s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes Floating2 {
+    from {
+    	-webkit-transform:translate(0, 0px);
+    }
+    30% {
+    	-webkit-transform: translate(15px, -20px);
+    }
+    65% {
+    	-webkit-transform:translate(-10px, 5px);
+    }
+    to {
+    	-webkit-transform: translate(0, -0px)
+    }    
+>>>>>>> 04b06d35fd490ebc7288fc4778544861243fd190
 }
