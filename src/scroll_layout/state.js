@@ -52,21 +52,6 @@ var state = {
 							title: 'First article title',
 							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
 							image: '16.jpg'
-						},
-						part_h: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '17.jpg'
-						},
-						part_h: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '18.jpg'
-						},
-						part_i: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '19.jpg'
 						}
 					}
 				},
@@ -125,6 +110,21 @@ var state = {
 							title: 'First article title',
 							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
 							image: '29.jpg'
+						},
+						part_j: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '30.jpg'
+						},
+						part_k: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '28.jpg'
+						},
+						part_l: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '29.jpg'
 						}
 					}
 				},
@@ -158,31 +158,6 @@ var state = {
 							title: 'First article title',
 							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
 							image: '34.jpg'
-						},
-						part_f: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '35.jpg'
-						},
-						part_g: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '36.jpg'
-						},
-						part_h: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '37.jpg'
-						},
-						part_h: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '38.jpg'
-						},
-						part_i: {
-							title: 'First article title',
-							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
-							image: '39.jpg'
 						}
 					}
 				},
@@ -296,6 +271,41 @@ var state = {
 							image: '08.jpg'
 						},
 						part_i: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '09.jpg'
+						},
+						part_j: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '03.jpg'
+						},
+						part_k: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '04.jpg'
+						},
+						part_l: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '05.jpg'
+						},
+						part_m: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '06.jpg'
+						},
+						part_n: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '07.jpg'
+						},
+						part_o: {
+							title: 'First article title',
+							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
+							image: '08.jpg'
+						},
+						part_p: {
 							title: 'First article title',
 							text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur sit voluptatum labore incidunt ullam dolor in eaque debitis repudiandae expedita, quidem libero fuga, quos rem corrupti, vitae reiciendis. A, autem!',
 							image: '09.jpg'

@@ -65,7 +65,7 @@ body{
 	//-webkit-filter: blur(10px);
 }
 .blur {
-	//-webkit-filter: blur(10px);
+	-webkit-filter: blur(10px);
 }
 
 .introContainer hr {
@@ -100,7 +100,7 @@ hr.short {
 }
 
 #articleContainer article  {
-	background-color: rgba(0, 0, 0, 0.4);
+	//background-color: rgba(0, 0, 0, 0.4);
 }
 #articleContainer article section {
 	width: 100%;
@@ -181,7 +181,7 @@ h3 span{
 .activeImage {
 	position: absolute;
 	z-index: 9999999999999999;
-	border: solid 5px red;
+	border: none;
 	width: 14%;
 	height: 14%;
 	background-position: center;
@@ -255,7 +255,7 @@ body,
 	z-index: 9999999999;
 }
 
-<<<<<<< HEAD
+
 .popupText {
 	position: absolute;
 	width: 30%;
@@ -264,7 +264,7 @@ body,
 	transform: translateY(-50%);
 	padding: 32px;
 	background-color: rgba(255, 255, 255, 0.6);
-=======
+
 }
 
 

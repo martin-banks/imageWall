@@ -8,22 +8,7 @@
 		y: []
 	}
 
-
-	
-
-
-
-
 	let totalLength = 0
-	
-
-
-
-
-
-
-
-
 
 /*
 	let allPartKeys = chapterKeys.map((key, index)=> { // for each chapter
@@ -42,35 +27,45 @@
 
 
 */
+	function removeBlur(){
+		let blurred = document.getElementsByClassName('grid-item')
+		for(let i=0; i<blurred.length; i++){
+			removeClass(blurred[i], 'blur')
+		}
+	}
+
 	function gridTemplate(){
 		let chapterKeys = Object.keys(state.content.chapters) // get all chapter keys
 		let everything = []
-		let allParts = chapterKeys.map(chapter=>{
+		let allParts = chapterKeys.map((chapter, index)=>{
 			let partKeys = Object.keys(state.content.chapters[chapter].parts)
 			partKeys.map(part=>{
 				let content = {
-					parts: state.content.chapters[chapter].parts[part],
-					chapter: chapter
+					image: state.content.chapters[chapter].parts[part].image,
+					chapter: chapter,
+					part: part,
+					index: index +1
 				}
 				everything.push(content)
 			})
 		})
 		console.log('allParts', everything, everything.length)
+		totalLength = everything.length
 		
 		let imageGrid = []
 		let everythingLength = everything.length
 		for(let i=0; i<everythingLength; i++){
 			let item = randomNumber(0, everything.length-1)
-			console.log(item)
 			imageGrid.push(`
-				<div id='grid_${i}' class="grid-item fade" data-chapter='${everything[item].chapter}'
-					style="background-image: url('${state.image.path}${everything[item].parts.image}')">
+				<div id='grid_${i}' class="grid-item fade" 
+					data-chapter='${everything[item].index}' 
+					data-chapterName='${everything[item].chapter}' 
+					data-part='${everything[item].part}'
+					style="background-image: url('${state.image.path}${everything[item].image}')">
 				</div>
 			`)
 			everything.splice(item, 1)	
 		}
-		console.log(imageGrid)
-
 		return imageGrid.join('')
 		
 
@@ -151,15 +146,16 @@
 		return imageGrid.join('')
 	}*/
 
+/*
 	function setTileSize() {
 		let tiles = document.getElementsByClassName('grid-item')
 		console.log(tiles)
 		for (let i = tiles.length - 1; i >= 0; i--) {
-			//tiles[i].style.width = `${windowWidth()/9}px`
-			//tiles[i].style.height = `${windowHeight()/5}px`
+			tiles[i].style.width = `${windowWidth()/9}px`
+			tiles[i].style.height = `${windowHeight()/5}px`
 		}
 	}
-
+*/
 	function chapterTemplate(){
 		let chapterKeys = Object.keys(state.content.chapters)
 		return chapterKeys.map((key, index)=>{
@@ -219,7 +215,10 @@
 		/*let activeImages = allChapterImages.filter((image)=>{
 			return image.hasAttribute(`chapter${num}`)
 		})*/
-		console.log(num)
+		/*console.log(
+			'num', num,
+			'allChapterImages', allChapterImages
+		)*/
 		let count = allChapterImages.length
 		for(let i = 0; i<count; i++){
 			//console.log(allChapterImages[i].getAttribute(`data-chapter`))
@@ -240,22 +239,29 @@
 	function resetImages(){
 		var allGridItems = document.getElementsByClassName('grid-item')
 		//console.log(allGridItems)
-		const imagesPerRow = 9
-		const numberOfRows = 5
+		const imagesPerRow = Math.ceil(Math.sqrt(totalLength))
+		const numberOfRows = Math.ceil(Math.sqrt(totalLength))
 		const imageWidth = windowWidth()/imagesPerRow
 		const imageHeight = windowHeight()/numberOfRows
 		//console.log('w', imageWidth, 'h', imageHeight)
+		/*console.log('imagesPerRow', imagesPerRow,
+			'\numberOfRows', numberOfRows)*/
 		//const currentRow = ()=> numberOfRows * i // 0 index
 		for (let currentRow = 0; currentRow<numberOfRows; currentRow++){
 			//console.log('current row', currentRow)
 			for(let rowIndex = 0; rowIndex<imagesPerRow; rowIndex++){
 				let imageToChange = (currentRow * imagesPerRow) + rowIndex
+				//console.log(totalLength, imageToChange)
+				if(imageToChange >= totalLength){
+					return
+				}
 				//console.log('image to change', imageToChange)
 				allGridItems[imageToChange].style.width = `${imageWidth}px`
 				allGridItems[imageToChange].style.height = `${imageHeight}px`
 				allGridItems[imageToChange].style.top = `${currentRow * imageHeight }px`
 				allGridItems[imageToChange].style.left = `${rowIndex * imageWidth}px`
-				allGridItems[imageToChange].className = `grid-item fade`
+				allGridItems[imageToChange].className = `grid-item fade blur`
+				
 			}
 		}
 	}
@@ -269,7 +275,7 @@
 		let activeImages = []
 
 		for(let i=0; i<allImages.length; i++){
-			if( allImages[i].className != 'grid-item fade' ){
+			if( allImages[i].className != 'grid-item fade blur' ){
 				activeImages.push(allImages[i]) 
 			}
 		}
@@ -290,8 +296,8 @@
 
 
 	function scrollEvents(){
-		var scrollPosition = window.scrollY
-		var currentChapter = Math.ceil((scrollPosition / state.articleHeight())  * Object.keys(state.content.chapters).length)
+		let scrollPosition = window.scrollY
+		let currentChapter = Math.ceil((scrollPosition / state.articleHeight())  * Object.keys(state.content.chapters).length)
 		console.log(state.content.previousChapter, currentChapter)
 		//console.log('scroll pos', scrollPosition)
 		//console.log('article height', state.articleHeight())
@@ -305,6 +311,7 @@
 		}
 		if(currentChapter === 0){
 			resetImages()
+			removeBlur()
 		}
 	}
 
@@ -323,8 +330,13 @@
 	function initPageLoad(){
 		renderTemplate(renderPage(), state.container)
 		getPageDetails();
-		setTileSize();
+	//	setTileSize();
 		resetImages();
+		let currentChapter = Math.ceil((window.scrollY / state.articleHeight())  * Object.keys(state.content.chapters).length)
+		if(currentChapter === 0){
+			resetImages()
+			removeBlur()
+		}
 		
 		generateActivePos();
 		window.addEventListener("scroll", ()=> {
@@ -346,8 +358,12 @@
 				size: {
 					w: event.target.style.width,
 					h: event.target.style.height
-				}
-			}			
+				},
+				chapter: event.target.getAttribute('data-chapterName'),
+				part: event.target.getAttribute('data-part')
+
+			}
+			let part = state.content.chapters[properties.chapter].parts[properties.part]			
 			let popupStyle = ()=>{
 				return `
 					width: ${properties.size.w};
@@ -362,8 +378,8 @@
 					<div id="popup">
 						<div id="popupImage" class="popupImagePosition" style='${popupStyle()}'>
 							<div class="popupText">
-								<h2>${properties.id}</h2>
-								<p>Dummy text taken from first entry in state. ${state.content.chapters[0].text}</p>
+								<h2>${part.title}</h2>
+								<p>Dummy text taken from first entry in state. ${part.text}</p>
 							</div>
 						</div>
 						
