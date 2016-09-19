@@ -9,76 +9,161 @@
 	}
 
 
+	
+
+
 
 
 	let totalLength = 0
-	let chapterkeys = Object.keys(state.article.chapers) // get all chapter keys
 	
-	let allPartKeys = chapterKeys.map(key=> { // for each chapter
-		let partKeys = Object.keys(state.article.chapters[key]) // add length of each chapters' parts to total
+
+
+
+
+
+
+
+
+
+/*
+	let allPartKeys = chapterKeys.map((key, index)=> { // for each chapter
+		chapterKeysIndexes.push(index) 
+		let partKeys = Object.keys(state.content.chapters[key].parts) // add length of each chapters' parts to total
 		totalLength += partKeys.length
 		return partKeys // return all of it's part keys
 	})
-	
-//		should output
-//		chapters [
-//			[ a,b,c ... ],
-//			[ a,b,c ... ],
-//			...
-//		]
 
 
-	for (let i=0; i<=totalLength; i++){
-		let chapterNumber = randomNumber(0, chapterKeys.length)
-		let chapterKey = chapterKeys[chapterNumber]
-		let randomChapter = state.article.chapters[ chapterKey ] // choose random chapter
-		
-		let partNumber = randomNumber(0, allPartKeys)
-		let randomPart = randomChapter[ partNumber ] //choose random part from random chapter
+	console.log(
+		'allPartKeys', allPartKeys,
+		'\nchapterKeysIndexes', chapterKeysIndexes
+		)
+	console.log(totalLength)
 
-//		----- render ----- 
 
-		chapterKeys.filter((chapterKey, chapterIndex)=>{
-			chapterKey.filter((part, partIndex)=>{
-				return part !== randomPart
+*/
+	function gridTemplate(){
+		let chapterKeys = Object.keys(state.content.chapters) // get all chapter keys
+		let everything = []
+		let allParts = chapterKeys.map(chapter=>{
+			let partKeys = Object.keys(state.content.chapters[chapter].parts)
+			partKeys.map(part=>{
+				let content = {
+					parts: state.content.chapters[chapter].parts[part],
+					chapter: chapter
+				}
+				everything.push(content)
 			})
-			return chapterKey.length > 0
 		})
+		console.log('allParts', everything, everything.length)
+		
+		let imageGrid = []
+		let everythingLength = everything.length
+		for(let i=0; i<everythingLength; i++){
+			let item = randomNumber(0, everything.length-1)
+			console.log(item)
+			imageGrid.push(`
+				<div id='grid_${i}' class="grid-item fade" data-chapter='${everything[item].chapter}'
+					style="background-image: url('${state.image.path}${everything[item].parts.image}')">
+				</div>
+			`)
+			everything.splice(item, 1)	
+		}
+		console.log(imageGrid)
 
-//		filter part
-//			return !part // remove this part from parts array
-//		filter chapter
-//			if chapter.part.length === 0 
+		return imageGrid.join('')
+		
+
+		/*
+		for (let i=0; i<totalLength; i++){
+			
+			let randomChapterIndex = randomNumber(0, (chapterKeysIndexes.length))
+			let randomChapterIndexValue = chapterKeysIndexes[randomChapterIndex]
+				let randomChapter = allPartKeys[ randomChapterIndexValue ]
+				let randomChapterKey = chapterKeys[ randomChapterIndexValue ]
+
+
+			let randomChapterLength = randomChapter.length
+				let randomPartIndex = randomNumber(0, (randomChapterLength))
+				let randomPartKey = randomChapter[randomPartIndex]
+			
+			let randomPart = state.content.chapters[randomChapterKey].parts[randomPartKey]
+
+			console.log(
+				'\n\n\n', i,
+				'\nrandomChapterIndex', randomChapterIndex,
+				'\nrandomChapterIndexValue', randomChapterIndexValue,
+				'\nrandomChapterKey', randomChapterKey,
+				'\nchapterKeysIndexes', chapterKeysIndexes,
+				'\nrandomChapter', randomChapter,
+				'\nrandomChapterLength', randomChapterLength,
+				'\nrandonPartIndex', randomPartIndex,
+				'\nrandomPartKey', randomPartKey,
+				'\nrandomPart', randomPart
+				)
+			console.log(
+				'chapter', randomChapterKey,'\npart', randomPartKey, 
+				'\nimage', randomPart.image
+			)
+
+			
+
+
+
+			imageGrid.push(`
+				<div id='grid_${i}' class="grid-item fade" data-chapter='${randomChapterKey}'
+					style="background-image: url('${state.image.path}${randomPart.image}')">
+				</div>
+			`)
+
+			// remove part chosen
+			allPartKeys[randomChapterIndex].splice(randomPartIndex, 1)
+			// remove chapter if empty
+			if(allPartKeys[randomChapterIndex].length === 0){
+				chapterKeysIndexes.splice(randomChapterIndex ,1)
+			}
+
+
+			allPartKeys.forEach(part=>{
+				console.log('part', part)
+			})
+		
+
+		}// for loop
+*/		//return imageGrid.join('')
 	}
 
-	
 
 
-	
+
+	/*
 	function gridTemplate(){
 		let imageGrid = []
-		for(let i = 0; i<state.article.chapters.length; i++){;
-			let r = randomNumber(0,state.article.chapters.parts.length)
+		for(let i = 0; i<state.content.chapters.length; i++){;
+			let r = randomNumber(0,state.content.chapters.parts.length)
 			//console.log(r)
 			imageGrid.push(`
 				<div id='grid_${i}' class="grid-item fade" data-chapter='${r+1}'
-					style="background-image: url('${state.image.path}${state.article.chapters[r].image}')">
+					style="background-image: url('${state.image.path}${state.content.chapters[r].image}')">
 				</div>
 			`)
 		}
 		return imageGrid.join('')
-	}
+	}*/
 
 	function setTileSize() {
 		let tiles = document.getElementsByClassName('grid-item')
+		console.log(tiles)
 		for (let i = tiles.length - 1; i >= 0; i--) {
-			tiles[i].style.width = `${windowWidth()/10}px`
-			tiles[i].style.height = `${windowHeight()/10}px`
+			//tiles[i].style.width = `${windowWidth()/9}px`
+			//tiles[i].style.height = `${windowHeight()/5}px`
 		}
 	}
 
 	function chapterTemplate(){
-		return state.article.chapters.map((chapter, index)=>{
+		let chapterKeys = Object.keys(state.content.chapters)
+		return chapterKeys.map((key, index)=>{
+			let chapter = state.content.chapters[key]
 			return `
 				<section id='chapter${index}' class="chapter set_${chapter.align}" style="height:${windowHeight()}px">
 					<div>
@@ -95,13 +180,13 @@
 	}
 
 	function introTemplate(){
-		let article = state.article
+		let content = state.content
 		return `
 			<section id="introContainer" style="height:${windowHeight()}px">
 				<div>
-					<h1>${article.headline}</h1>
+					<h1>${content.headline}</h1>
 					<hr class="white short">
-					<h2>${article.intro}</h2>
+					<h2>${content.intro}</h2>
 				</div>		
 			</section>
 		`
@@ -148,25 +233,28 @@
 	}
 
 	function getPageDetails(){
-		state.chapterCount = state.article.chapters.length;
+		state.chapterCount = state.content.chapters.length;
 		//state.articleHeight = document.getElementById('articleContainer').clientHeight;
 	}
 	
 	function resetImages(){
 		var allGridItems = document.getElementsByClassName('grid-item')
-
-		const imagesPerRow = 10
-		const numberOfRows = 10
-		const imageWidth = 10
-		const imageHeight = 10
+		//console.log(allGridItems)
+		const imagesPerRow = 9
+		const numberOfRows = 5
+		const imageWidth = windowWidth()/imagesPerRow
+		const imageHeight = windowHeight()/numberOfRows
+		//console.log('w', imageWidth, 'h', imageHeight)
 		//const currentRow = ()=> numberOfRows * i // 0 index
 		for (let currentRow = 0; currentRow<numberOfRows; currentRow++){
 			//console.log('current row', currentRow)
 			for(let rowIndex = 0; rowIndex<imagesPerRow; rowIndex++){
 				let imageToChange = (currentRow * imagesPerRow) + rowIndex
 				//console.log('image to change', imageToChange)
-				allGridItems[imageToChange].style.top = `${rowIndex * imageWidth }%`
-				allGridItems[imageToChange].style.left = `${currentRow * imageHeight}%`
+				allGridItems[imageToChange].style.width = `${imageWidth}px`
+				allGridItems[imageToChange].style.height = `${imageHeight}px`
+				allGridItems[imageToChange].style.top = `${currentRow * imageHeight }px`
+				allGridItems[imageToChange].style.left = `${rowIndex * imageWidth}px`
 				allGridItems[imageToChange].className = `grid-item fade`
 			}
 		}
@@ -203,17 +291,17 @@
 
 	function scrollEvents(){
 		var scrollPosition = window.scrollY
-		var currentChapter = Math.ceil((scrollPosition / state.articleHeight())  * state.chapterCount)
-		console.log(state.article.previousChapter, currentChapter)
+		var currentChapter = Math.ceil((scrollPosition / state.articleHeight())  * Object.keys(state.content.chapters).length)
+		console.log(state.content.previousChapter, currentChapter)
 		//console.log('scroll pos', scrollPosition)
 		//console.log('article height', state.articleHeight())
 		//console.log('chapter count', state.chapterCount)
-		if(currentChapter !== state.article.previousChapter){
-			state.article.previousChapter = currentChapter;
+		if(currentChapter !== state.content.previousChapter){
+			state.content.previousChapter = currentChapter;
 			resetImages();
 			highlightImage(currentChapter)
 			positionActiveImages()
-			//console.log(state.article.previousChapter, currentChapter);
+			//console.log(state.content.previousChapter, currentChapter);
 		}
 		if(currentChapter === 0){
 			resetImages()
@@ -275,7 +363,7 @@
 						<div id="popupImage" class="popupImagePosition" style='${popupStyle()}'>
 							<div class="popupText">
 								<h2>${properties.id}</h2>
-								<p>Dummy text taken from first entry in state. ${state.article.chapters[0].text}</p>
+								<p>Dummy text taken from first entry in state. ${state.content.chapters[0].text}</p>
 							</div>
 						</div>
 						
@@ -284,7 +372,7 @@
 			}
 			console.log(popupCard());
 			renderTemplate(popupCard(), document.getElementById('popupContainer'));
-<<<<<<< HEAD
+//<<<<<<< HEAD
 			//event.target.style.display = 'none'
 			let tileId = closest(event.target, '.grid-item').id;
 			document.getElementById(tileId).style.display = 'none'
@@ -308,7 +396,7 @@
 			delegate('#popupContainer', 'click', '#popupImage', (e)=>{ // close panel
 				document.querySelector('body').style.overflow = ''
 				console.log('tile id ', tileId, e)
-=======
+//=======
 			event.target.style.display = 'none'
 			Velocity(document.getElementById("popupImage"), { 
 																left: '20%', 
@@ -322,19 +410,6 @@
 																delay: 100
 															});
 
-			delegate('#popupContainer', 'click', '#popupImage', ()=>{
->>>>>>> 04b06d35fd490ebc7288fc4778544861243fd190
-				// remove popup image
-				console.log(properties.pos.x)
-				// animate card closing
-				/*Velocity(event.target, {
-										left: 0,
-										top: 0,
-										width: '100px',
-										height: '100px'
-									}).then(()=>{
-										document.getElementById('popupContainer').innerHTML = ''
-									})*/
 				document.getElementById(tileId).style.display = ''
 				document.getElementById('popupContainer').innerHTML = ''
 			}, tileId)

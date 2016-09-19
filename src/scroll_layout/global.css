@@ -62,10 +62,10 @@ body{
 
 .fade{
 	opacity: 0.3;
-	-webkit-filter: blur(10px);
+	//-webkit-filter: blur(10px);
 }
 .blur {
-	-webkit-filter: blur(10px);
+	//-webkit-filter: blur(10px);
 }
 
 .introContainer hr {
