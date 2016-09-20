@@ -1,4 +1,4 @@
-const article = {
+const content = {
 	headline: '',
 	standfirst: '',
 	byline: '',
