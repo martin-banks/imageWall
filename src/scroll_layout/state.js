@@ -1,7 +1,9 @@
 var state = {
 		container: document.getElementById('appContainer'),
 		count: 45,
-		pageOffset: 200,
+		pageOffset: 400,
+		rows: 6,
+		columns: 6,
 		image: {
 			path: '../images/',
 			name: ()=>`_${randomNumber(1,51)}.jpg`

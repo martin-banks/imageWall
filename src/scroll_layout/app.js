@@ -3,11 +3,12 @@
 	const windowHeight = ()=> window.innerHeight
 	const windowWidth = ()=> window.innerWidth
 	const positions = {
+		pairs: [],
 		x: [],
 		y: []
 	}
 	let totalLength = 0
-	
+
 	function removeBlur(){
 		let blurred = document.getElementsByClassName('grid-item')
 		for(let i=0; i<blurred.length; i++){
@@ -168,7 +169,26 @@
 
 
 
+	generateActivePos = ()=>{
+		positions.pairs = []
+		
+		for (let rowIndex=0; rowIndex<state.rows; rowIndex++){
+			for(let columnIndex=0; columnIndex<state.columns; columnIndex++){
+				let posX = Math.floor( windowWidth() / state.columns) * columnIndex
+				let posY = Math.floor( windowHeight() / state.rows) * rowIndex
+				positions.pairs.push([posX, posY])
+			}
+		}
+		for(let i = 0; i<5; i++){
+			positions.x.push(Math.floor( windowWidth() / 5) * i)
+			positions.y.push(Math.floor( windowHeight() / 5) * i)
+		}
+		console.log('pairs', positions.pairs)
+	}
+
+
 	function positionActiveImages(){
+		generateActivePos()
 		let allImages = document.getElementsByClassName('grid-item');
 		//console.log(allImages)
 		let activeImages = []
@@ -179,16 +199,25 @@
 			}
 		}
 		//console.log(activeImages);
-		let x = positions.x;
-		let y = positions.y;
+		//let x = positions.x;
+		//let y = positions.y;
 		for(let i=0; i<activeImages.length; i++){
-			let rX = randomNumber(0, x.length);
-			let rY = randomNumber(0, y.length);
+			let positionsLeft = positions.pairs.length
+			let randomPosIndex = randomNumber(0, positionsLeft)
+			let pos = positions.pairs[randomPosIndex]
+			console.log(
+				'randomPosIndex', randomPosIndex,
+				'\npos', pos
+				)
+			//let rX = randomNumber(0, x.length);
+			//let rY = randomNumber(0, y.length);
 
-			console.log('\tx', rX, 'y', rY)
+			//console.log('\tx', rX, 'y', rY)
 			activeImages[i].className = `grid-item activeImage float${randomNumber(1,2)}`
-			activeImages[i].style.top = y[rY] + 'px'
-			activeImages[i].style.left = x[rX] + 'px'
+			
+			activeImages[i].style.left = pos[0] + 'px'
+			activeImages[i].style.top = pos[1] + 'px'
+			positions.pairs.splice(randomPosIndex, 1)
 		}
 		console.log('\n-----------------------\n')
 	}
@@ -214,12 +243,7 @@
 		}
 	}
 
-	generateActivePos = ()=>{
-		for(let i = 0; i<8; i++){
-			positions.x.push(Math.floor( windowWidth() / 8) * i)
-			positions.y.push(Math.floor( windowHeight() / 8) * i)
-		}
-	}
+	
 	
 
 
