@@ -2,31 +2,12 @@
 
 	const windowHeight = ()=> window.innerHeight
 	const windowWidth = ()=> window.innerWidth
-
 	const positions = {
 		x: [],
 		y: []
 	}
-
 	let totalLength = 0
-
-/*
-	let allPartKeys = chapterKeys.map((key, index)=> { // for each chapter
-		chapterKeysIndexes.push(index) 
-		let partKeys = Object.keys(state.content.chapters[key].parts) // add length of each chapters' parts to total
-		totalLength += partKeys.length
-		return partKeys // return all of it's part keys
-	})
-
-
-	console.log(
-		'allPartKeys', allPartKeys,
-		'\nchapterKeysIndexes', chapterKeysIndexes
-		)
-	console.log(totalLength)
-
-
-*/
+	
 	function removeBlur(){
 		let blurred = document.getElementsByClassName('grid-item')
 		for(let i=0; i<blurred.length; i++){
@@ -67,95 +48,9 @@
 			everything.splice(item, 1)	
 		}
 		return imageGrid.join('')
-		
 
-		/*
-		for (let i=0; i<totalLength; i++){
-			
-			let randomChapterIndex = randomNumber(0, (chapterKeysIndexes.length))
-			let randomChapterIndexValue = chapterKeysIndexes[randomChapterIndex]
-				let randomChapter = allPartKeys[ randomChapterIndexValue ]
-				let randomChapterKey = chapterKeys[ randomChapterIndexValue ]
-
-
-			let randomChapterLength = randomChapter.length
-				let randomPartIndex = randomNumber(0, (randomChapterLength))
-				let randomPartKey = randomChapter[randomPartIndex]
-			
-			let randomPart = state.content.chapters[randomChapterKey].parts[randomPartKey]
-
-			console.log(
-				'\n\n\n', i,
-				'\nrandomChapterIndex', randomChapterIndex,
-				'\nrandomChapterIndexValue', randomChapterIndexValue,
-				'\nrandomChapterKey', randomChapterKey,
-				'\nchapterKeysIndexes', chapterKeysIndexes,
-				'\nrandomChapter', randomChapter,
-				'\nrandomChapterLength', randomChapterLength,
-				'\nrandonPartIndex', randomPartIndex,
-				'\nrandomPartKey', randomPartKey,
-				'\nrandomPart', randomPart
-				)
-			console.log(
-				'chapter', randomChapterKey,'\npart', randomPartKey, 
-				'\nimage', randomPart.image
-			)
-
-			
-
-
-
-			imageGrid.push(`
-				<div id='grid_${i}' class="grid-item fade" data-chapter='${randomChapterKey}'
-					style="background-image: url('${state.image.path}${randomPart.image}')">
-				</div>
-			`)
-
-			// remove part chosen
-			allPartKeys[randomChapterIndex].splice(randomPartIndex, 1)
-			// remove chapter if empty
-			if(allPartKeys[randomChapterIndex].length === 0){
-				chapterKeysIndexes.splice(randomChapterIndex ,1)
-			}
-
-
-			allPartKeys.forEach(part=>{
-				console.log('part', part)
-			})
-		
-
-		}// for loop
-*/		//return imageGrid.join('')
 	}
 
-
-
-
-	/*
-	function gridTemplate(){
-		let imageGrid = []
-		for(let i = 0; i<state.content.chapters.length; i++){;
-			let r = randomNumber(0,state.content.chapters.parts.length)
-			//console.log(r)
-			imageGrid.push(`
-				<div id='grid_${i}' class="grid-item fade" data-chapter='${r+1}'
-					style="background-image: url('${state.image.path}${state.content.chapters[r].image}')">
-				</div>
-			`)
-		}
-		return imageGrid.join('')
-	}*/
-
-/*
-	function setTileSize() {
-		let tiles = document.getElementsByClassName('grid-item')
-		console.log(tiles)
-		for (let i = tiles.length - 1; i >= 0; i--) {
-			tiles[i].style.width = `${windowWidth()/9}px`
-			tiles[i].style.height = `${windowHeight()/5}px`
-		}
-	}
-*/
 	function chapterTemplate(){
 		let chapterKeys = Object.keys(state.content.chapters)
 		return chapterKeys.map((key, index)=>{
@@ -220,9 +115,6 @@
 
 	function highlightImage(num){
 		let allChapterImages = document.getElementsByClassName(`grid-item`)
-		/*let activeImages = allChapterImages.filter((image)=>{
-			return image.hasAttribute(`chapter${num}`)
-		})*/
 		/*console.log(
 			'num', num,
 			'allChapterImages', allChapterImages
@@ -237,8 +129,7 @@
 				allChapterImages[i].className = 'grid-item'
 				allChapterImages[i].innerHTML = activeContentTemplate(state.content.chapters[chapter].parts[part]) 
 			}
-			//let randomImage = document.getElementById(`grid_${randomNumber(1, 99)}`);
-			//randomImage.className = 'grid-item';
+
 			
 		}
 	}
@@ -250,7 +141,6 @@
 	
 	function resetImages(){
 		var allGridItems = document.getElementsByClassName('grid-item')
-		//console.log(allGridItems)
 		const imagesPerRow = Math.ceil(Math.sqrt(totalLength))
 		const numberOfRows = Math.ceil(Math.sqrt(totalLength))
 		const imageWidth = windowWidth()/imagesPerRow
@@ -258,16 +148,12 @@
 		//console.log('w', imageWidth, 'h', imageHeight)
 		/*console.log('imagesPerRow', imagesPerRow,
 			'\numberOfRows', numberOfRows)*/
-		//const currentRow = ()=> numberOfRows * i // 0 index
 		for (let currentRow = 0; currentRow<numberOfRows; currentRow++){
-			//console.log('current row', currentRow)
 			for(let rowIndex = 0; rowIndex<imagesPerRow; rowIndex++){
 				let imageToChange = (currentRow * imagesPerRow) + rowIndex
-				//console.log(totalLength, imageToChange)
 				if(imageToChange >= totalLength){
 					return
 				}
-				//console.log('image to change', imageToChange)
 				allGridItems[imageToChange].style.width = `${imageWidth}px`
 				allGridItems[imageToChange].style.height = `${imageHeight}px`
 				allGridItems[imageToChange].style.top = `${currentRow * imageHeight }px`
@@ -401,8 +287,7 @@
 			}
 			console.log(popupCard());
 			renderTemplate(popupCard(), document.getElementById('popupContainer'));
-//<<<<<<< HEAD
-			//event.target.style.display = 'none'
+
 			let tileId = closest(event.target, '.grid-item').id;
 			document.getElementById(tileId).style.display = 'none'
 			Velocity(
@@ -425,7 +310,7 @@
 			delegate('#popupContainer', 'click', '#popupImage', (e)=>{ // close panel
 				document.querySelector('body').style.overflow = ''
 				console.log('tile id ', tileId, e)
-//=======
+
 			event.target.style.display = 'none'
 			Velocity(document.getElementById("popupImage"), { 
 																left: '20%', 
