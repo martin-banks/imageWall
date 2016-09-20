@@ -171,18 +171,30 @@
 
 	generateActivePos = ()=>{
 		positions.pairs = []
-		
-		for (let rowIndex=0; rowIndex<state.rows; rowIndex++){
-			for(let columnIndex=0; columnIndex<state.columns; columnIndex++){
-				let posX = Math.floor( windowWidth() / state.columns) * columnIndex
-				let posY = Math.floor( windowHeight() / state.rows) * rowIndex
+
+		let minRowSkip = Math.floor(Math.sqrt(state.rows))			// 2
+		let minColumnSkip = Math.floor(Math.sqrt(state.columns))		// 2
+
+		let maxRowSkip = Math.ceil(Math.sqrt(state.rows))			// 3
+		let maxColumnSkip = Math.ceil(Math.sqrt(state.columns))		// 3
+
+		for (let row=0; row<state.rows; row++){
+			for(let column=0; column<state.columns; column++){
+				if ((row >= minRowSkip && row <= maxRowSkip) && (column >= minColumnSkip && column <= maxColumnSkip)){
+					//return
+				} else {
+					let posX = Math.floor( windowWidth() / state.columns) * column
+				let posY = Math.floor( windowHeight() / state.rows) * row
 				positions.pairs.push([posX, posY])
+				}
+
 			}
 		}
+		/*
 		for(let i = 0; i<5; i++){
 			positions.x.push(Math.floor( windowWidth() / 5) * i)
 			positions.y.push(Math.floor( windowHeight() / 5) * i)
-		}
+		}*/
 		console.log('pairs', positions.pairs)
 	}
 
