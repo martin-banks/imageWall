@@ -208,6 +208,14 @@
 		`
 	}
 
+	function activeContentTemplate(part){
+		return `
+			<div class="activeTileTitle">
+				<h4>${part.title}</h4>
+			</div>
+		`
+	}
+
 	
 
 	function highlightImage(num){
@@ -222,8 +230,12 @@
 		let count = allChapterImages.length
 		for(let i = 0; i<count; i++){
 			//console.log(allChapterImages[i].getAttribute(`data-chapter`))
-			if(allChapterImages[i].getAttribute(`data-chapter`) == num ){
+			let chapterNumber = allChapterImages[i].getAttribute(`data-chapter`)
+			let chapter = allChapterImages[i].getAttribute(`data-chapterName`)
+			let part = allChapterImages[i].getAttribute(`data-part`)
+			if(chapterNumber == num ){
 				allChapterImages[i].className = 'grid-item'
+				allChapterImages[i].innerHTML = activeContentTemplate(state.content.chapters[chapter].parts[part]) 
 			}
 			//let randomImage = document.getElementById(`grid_${randomNumber(1, 99)}`);
 			//randomImage.className = 'grid-item';
@@ -261,6 +273,7 @@
 				allGridItems[imageToChange].style.top = `${currentRow * imageHeight }px`
 				allGridItems[imageToChange].style.left = `${rowIndex * imageWidth}px`
 				allGridItems[imageToChange].className = `grid-item fade blur`
+				allGridItems[imageToChange].innerHTML = ''
 				
 			}
 		}
